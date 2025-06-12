@@ -1,40 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 📊 Social Media Analytics Dashboard
 
-## Getting Started
+A fully responsive and animated analytics dashboard built with **Next.js**, **React Chart.js 2**, **Tailwind CSS**, **Framer Motion**, and **React Icons**.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 10 different chart types (Bar, Line, Pie, Radar, etc.)
+- Responsive layout with Tailwind CSS Grid
+- Entry animations using Framer Motion
+- Modular `ChartCard` component for reusability
+- Live follower count animation using `react-countup`
+- Social media navbar with icons and animated counters
+
+---
+
+## 📁 Project Structure
+
+```
+/paapi-dashboard
+├── components/
+│   ├── ChartCard.js           # Reusable chart wrapper with animation
+│   └── SocialMediaNavBar.js  # Responsive social navbar with icons
+├── pages/
+│   └── index.js               # Dashboard using ChartCard and Navbar
+├── public/
+├── styles/
+│   └── globals.css            # Tailwind base styles
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md                  # You are here
+```
+
+---
+
+## 🛠️ Technologies Used
+
+- **Next.js** – Framework for SSR React apps
+- **React Chart.js 2** – Charting library for data visualizations
+- **Tailwind CSS** – Utility-first responsive styling
+- **Framer Motion** – Declarative animations for React
+- **React Icons** – Easy access to social icons
+- **React CountUp** – Smooth number animation
+
+---
+
+## 📦 Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/paapi-dashboard.git
+cd paapi-dashboard
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser at [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 🧠 Tips
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- You can modify chart data or add more cards in `pages/index.js`
+- To change icon style or count, go to `SocialMediaNavBar.js`
+- To tweak animation, adjust `ChartCard.js` Framer Motion settings
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Made with ❤️ by \[Rishi Verma]

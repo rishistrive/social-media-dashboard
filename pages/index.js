@@ -1,115 +1,258 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import React from "react";
+import "chart.js/auto";
+import {
+  Bar,
+  Line,
+  Pie,
+  Doughnut,
+  Radar,
+  PolarArea,
+  Scatter,
+  Bubble,
+} from "react-chartjs-2";
+import { IoStatsChart } from "react-icons/io5";
+import { motion } from "framer-motion";
+import ChartCard from "@/components/ChartCard";
+import SocialMediaNavBar from "@/components/SocialMediaNavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+const Age = ["10-20", "20-30", "30-50", ">50"];
+const data = [12, 19, 3, 5, 2, 3];
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: {
+        font: {
+          size: 12,
+          family: "Inter, sans-serif",
+        },
+      },
+    },
+    tooltip: {
+      callbacks: {
+        label: function (context) {
+          const total = context.dataset.data.reduce((a, b) => a + b, 0);
+          const value = context.raw;
+          const percentage = ((value / total) * 100).toFixed(1);
+          return `${percentage}%`;
+        },
+      },
+    },
+  },
+};
 
-export default function Home() {
-  return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+export default function Dashboard() {
+  const charts = [
+    {
+      title: "Monthly Engagement",
+      chart: (
+        <Bar
+          data={{
+            labels,
+            datasets: [
+              { label: "Engagement", data, backgroundColor: "#3B82F6" },
+            ],
+          }}
+          options={options}
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      ),
+    },
+    {
+      title: "Monthly Reach",
+      chart: (
+        <Line
+          data={{
+            labels,
+            datasets: [{ label: "Reach", data, borderColor: "#10B981" }],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Age Distribution %",
+      chart: (
+        <Pie
+          data={{
+            labels: Age,
+            datasets: [
+              {
+                label: "Age",
+                data: [20, 40, 30, 10],
+                backgroundColor: ["#EF4444", "#3B82F6", "#10B981", "#F59E0B"],
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Share Count Breakdown",
+      chart: (
+        <Doughnut
+          data={{
+            labels,
+            datasets: [
+              {
+                label: "Shared",
+                data,
+                backgroundColor: [
+                  "#EF4444",
+                  "#3B82F6",
+                  "#10B981",
+                  "#F59E0B",
+                  "#8B5CF6",
+                  "#EC4899",
+                ],
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "User Behavior Profile",
+      chart: (
+        <Radar
+          data={{
+            labels,
+            datasets: [
+              {
+                label: "Radar",
+                data,
+                backgroundColor: "rgba(34, 197, 94, 0.2)",
+                borderColor: "#22C55E",
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Activity Distribution",
+      chart: (
+        <PolarArea
+          data={{
+            labels,
+            datasets: [
+              {
+                label: "Polar",
+                data,
+                backgroundColor: [
+                  "#E879F9",
+                  "#6366F1",
+                  "#FACC15",
+                  "#34D399",
+                  "#F87171",
+                ],
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Engagement vs Performance",
+      chart: (
+        <Scatter
+          data={{
+            datasets: [
+              {
+                label: "Scatter",
+                data: [
+                  { x: 4.5, y: 7 },
+                  { x: 6, y: 5 },
+                ],
+                backgroundColor: "#4BC0C0",
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Reach Impact",
+      chart: (
+        <Bubble
+          data={{
+            datasets: [
+              {
+                label: "Bubble",
+                data: [{ x: 5, y: 10, r: 10 }],
+                backgroundColor: "#FF6384",
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Follower Growth",
+      chart: (
+        <Line
+          data={{
+            labels,
+            datasets: [
+              {
+                label: "Followers",
+                data: [10, 20, 15, 30, 25, 40],
+                borderColor: "#8B5CF6",
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+    {
+      title: "Comment Volume",
+      chart: (
+        <Bar
+          data={{
+            labels,
+            datasets: [
+              {
+                label: "Comments",
+                data: [5, 10, 8, 6, 12, 7],
+                backgroundColor: "#F97316",
+              },
+            ],
+          }}
+          options={options}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-black from-blue-50 to-purple-100 py-12 px-6">
+      <motion.div
+        className="flex w-full gap-2 justify-center items-center mb-12"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <IoStatsChart className="text-4xl text-white" />
+        <h1 className="text-4xl font-extrabold text-white text-center">
+          Social Media Analytics Dashboard
+        </h1>
+      </motion.div>
+      <SocialMediaNavBar />
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {charts.map((item, i) => (
+          <ChartCard key={i} title={item.title} chart={item.chart} index={i} />
+        ))}
+      </div>
     </div>
   );
 }
