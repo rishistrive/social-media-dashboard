@@ -50,7 +50,7 @@ A fully responsive and animated analytics dashboard built with **Next.js**, **Re
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/paapi-dashboard.git
+git clone https://github.com/rishistrive/social-media-dashboard.git
 cd paapi-dashboard
 ```
 
